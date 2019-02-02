@@ -31,8 +31,6 @@ def get_songs(req):
                  "name": name,
                  "singer": singer}
     resp = {'status_code': 200, 'data': resp_data}
-    print(resp)
-    # return resp
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
 

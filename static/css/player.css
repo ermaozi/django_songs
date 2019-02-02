@@ -79,7 +79,7 @@
     float: left;
     width: 130px;
     height: 130px;
-    background: url(../music_data/images/cd.png) no-repeat center;
+    background: url(../images/cd.png) no-repeat center;
     background-size: 100%;
     position: relative;
 }

@@ -24,53 +24,29 @@ class Player {
 class Musics {
     //歌曲
     constructor() {
-    this.songs = (function(){
-        var song_data = [];
-        $.ajax({
-            type: "GET",
-            url: "get_songs",
-            dataType:'json',
-            data:{cmd:'coordinates'},
-            async: false,
-            success: function(data){
-                var songs = data['data']['songs'];
-                for (var i = 0, len = songs.length; i < len; i++){
-                    song_data.push({
-                        id: i,
-                        title: data['data']['name'][i],
-                        singer: data['data']['singer'][i],
-                        songUrl: '/static/music_data/songs/'+songs[i],
-                        imageUrl: '/static/music_data/images/'+data['data']['bgp'][i]
-                    })
+        this.songs = (function(){
+            var song_data = [];
+            $.ajax({
+                type: "GET",
+                url: "get_songs",
+                dataType:'json',
+                data:{cmd:'coordinates'},
+                async: false,
+                success: function(data){
+                    var songs = data['data']['songs'];
+                    for (var i = 0, len = songs.length; i < len; i++){
+                        song_data.push({
+                            id: i,
+                            title: data['data']['name'][i],
+                            singer: data['data']['singer'][i],
+                            songUrl: '/static/music_data/songs/'+songs[i],
+                            imageUrl: '/static/music_data/images/'+data['data']['bgp'][i]
+                        })
+                    }
                 }
-            }
-        });
-        return song_data
-    })();
-
-        console.log(this.songs)
-//        this.songs = [{
-//                id: 1,
-//                title: 'Driving Home for Christmas',
-//                singer: 'Campsite Dream',
-//                songUrl: '/static/music_data/songs/song.mp3',
-//                imageUrl: '/static/music_data/images/c.jpg'
-//            },
-//            {
-//                id: 2,
-//                title: '认真的雪',
-//                singer: '薛之谦',
-//                songUrl: './songs/song.mp3',
-//                imageUrl: './images/songs/renzhendexue.jpg'
-//            },
-//            {
-//                id: 3,
-//                title: '演员',
-//                singer: '薛之谦',
-//                songUrl: './songs/song.mp3',
-//                imageUrl: './images/songs/yanyuan.jpg'
-//            }
-//        ]
+            });
+            return song_data
+        })();
     }
     //根据索引获取歌曲的方法
     getSongByNum(index) {
