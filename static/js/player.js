@@ -24,28 +24,31 @@ class Player {
 class Musics {
     //歌曲
     constructor() {
+    this.songs = (function(){
         var song_data = [];
-        $(document).ready(
-        function(){
         $.ajax({
-            type: "GTE",
+            type: "GET",
             url: "get_songs",
+            dataType:'json',
+            data:{cmd:'coordinates'},
             async: false,
             success: function(data){
-                var songs = data['songs'];
-                for (var i, len = songs.length; i < len; i++){
+                var songs = data['data']['songs'];
+                for (var i = 0, len = songs.length; i < len; i++){
                     song_data.push({
                         id: i,
-                        title: data['name'][i],
-                        singer: data['singer'][i],
+                        title: data['data']['name'][i],
+                        singer: data['data']['singer'][i],
                         songUrl: '/static/music_data/songs/'+songs[i],
-                        imageUrl: '/static/music_data/images/'+data['bgp'][i]
+                        imageUrl: '/static/music_data/images/'+data['data']['bgp'][i]
                     })
                 }
             }
         });
-        });
-        this.songs = song_data;
+        return song_data
+    })();
+
+        console.log(this.songs)
 //        this.songs = [{
 //                id: 1,
 //                title: 'Driving Home for Christmas',
