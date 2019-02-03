@@ -146,7 +146,7 @@ class PlayerCreator {
                         var first_song = all_song[0];
                         var song_top = first_song.offsetTop;
                         var a = $(".music-player__list").offset().top;
-                        x = song_top - a  + 190;
+                        x = song_top - a  + 40;
                     }
                 }
                 $(".music-player__list").animate({scrollTop:x}, 500);
