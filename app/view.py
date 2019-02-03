@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import os
 import json
+import random
 
 
 def index(req):
@@ -25,7 +26,10 @@ def get_songs(req):
     name = [name[1].strip() for name in name_or_singer]
     singer = [name[0].strip() for name in name_or_singer]
     bgp_path = os.path.realpath(os.path.join(__file__, "../../static/music_data/images/"))
-    bgp = os.listdir(bgp_path)
+    bgp_file = os.listdir(bgp_path)
+    bgp = []
+    for i in range(len(songs)):
+        bgp.append(bgp_file[random.randint(0, len(bgp_file) - 1)])
     resp_data = {"songs": songs,
                  "bgp": bgp,
                  "name": name,

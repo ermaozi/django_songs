@@ -134,6 +134,7 @@ class PlayerCreator {
                 var x = 0;
                 if(index == ''){ // 如果搜索框输入为空
                     $('li').removeClass('found');
+                    x = 0
                     return false;
                 }else{
                     var parent = $('ul');
@@ -151,7 +152,6 @@ class PlayerCreator {
                 }
                 $(".music-player__list").animate({scrollTop:x}, 500);
 
-//                $("p:contains('"+index+"')").parent().prependTo(parent).addClass('on');
         })
         //播放按钮
         this.$play = new Btns('.player-control__btn--play', {

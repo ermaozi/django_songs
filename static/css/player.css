@@ -315,6 +315,7 @@ button {
 .bar7 input:focus {
 	width:100%;
 	background:rgba(50, 50, 50, 0.3);
+	color: rgba(250,250,250, 0.9);
 }
 .bar7 button {
 	background:none;
