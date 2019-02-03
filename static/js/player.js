@@ -68,6 +68,7 @@ class PlayerCreator {
         this.loop_mode = 0; // 1 2
         // 下方歌曲列表容器
         this.song_list = $('.music__list_content');
+        this.song_find = $('.find_song');
 
         this.render_doms = { //切换歌曲时需要渲染的dom组
             title: $('.music__info--title'),
@@ -127,6 +128,31 @@ class PlayerCreator {
     }
     //绑定各种事件
     bindEventListener() {
+        //搜索框
+        this.song_find.on('keyup', function(){
+            var index = $.trim($('.find_song').val().toString()); // 去掉两头空格
+                var x = 0;
+                if(index == ''){ // 如果搜索框输入为空
+                    $('li').removeClass('found');
+                    return false;
+                }else{
+                    var parent = $('ul');
+                    $('li').removeClass('found');
+                    //选择包含文本框值的所有加上focus类样式，并把它（们）移到ul的最前面
+                    // prependTo() 方法在被选元素的开头（仍位于内部）插入指定内容
+                    // contains 选择器，选取包含指定字符串的元素
+                    var all_song=$("li:contains('"+index+"')");
+                    if (all_song){
+                        var first_song = all_song[0];
+                        var song_top = first_song.offsetTop;
+                        var a = $(".music-player__list").offset().top;
+                        x = song_top - a  + 190;
+                    }
+                }
+                $(".music-player__list").animate({scrollTop:x}, 500);
+
+//                $("p:contains('"+index+"')").parent().prependTo(parent).addClass('on');
+        })
         //播放按钮
         this.$play = new Btns('.player-control__btn--play', {
             click: this.handlePlayAndPause.bind(this)
