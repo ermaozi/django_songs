@@ -36,7 +36,7 @@ class Musics {
                     var songs = data['data']['songs'];
                     for (var i = 0, len = songs.length; i < len; i++){
                         song_data.push({
-                            id: i,
+                            id: data['data']['rspid'][i],
                             title: data['data']['name'][i],
                             singer: data['data']['singer'][i],
                             songUrl: '/static/music_data/songs/'+songs[i],
