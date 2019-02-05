@@ -1,8 +1,3 @@
-/* 播放器大小 */
-.music-player {
-    width: 550px;
-}
-
 /* 播放器位置 */
 .music-player {
     position: relative;
@@ -123,14 +118,6 @@
     margin: auto;
 }
 
-
-/* 播放器控件 */
-
-.music-player__controls {
-    width: 330px;
-    height: 130px;
-    float: right;
-}
 
 /* 歌曲信息 */
 .music__info {

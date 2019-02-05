@@ -1,0 +1,10 @@
+.music-player__controls{
+    height: 130px;
+
+}
+.music-player {
+    width: 346px;
+}
+.music-player__disc {
+    display: none;
+}
