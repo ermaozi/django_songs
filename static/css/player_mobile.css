@@ -9,3 +9,7 @@
 .music-player__disc {
     display: none;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}

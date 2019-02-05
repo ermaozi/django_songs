@@ -314,3 +314,18 @@ button {
 	font-family:FontAwesome;
 	color:#324b4e;
 }
+
+.found {
+    background:rgba(180,180,180, 0.1);
+    border-radius: 7px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #25252566;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ffffff2e;
+}

@@ -10,3 +10,7 @@
     height: 130px;
     float: right;
 }
+
+::-webkit-scrollbar {
+    width: 13px;
+}

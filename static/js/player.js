@@ -143,8 +143,9 @@ class PlayerCreator {
                     // prependTo() 方法在被选元素的开头（仍位于内部）插入指定内容
                     // contains 选择器，选取包含指定字符串的元素
                     var all_song=$("li:contains('"+index+"')");
-                    if (all_song){
-                        var first_song = all_song[0];
+                    var first_song = all_song[0];
+                    if (first_song){
+                        all_song.addClass('found');
                         var song_top = first_song.offsetTop;
                         var a = $(".music-player__list").offset().top;
                         x = song_top - a  + 40;
