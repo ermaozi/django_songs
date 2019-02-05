@@ -1,3 +1,8 @@
+a {
+    color: rgba(180,180,180, 0.3);
+    color:#333;text-decoration:none;
+}
+
 /* 播放器位置 */
 .music-player {
     position: relative;
@@ -14,7 +19,7 @@
     border-radius: 5px;
     -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    height: 250px;
+    height: 266px;
     overflow-y:auto;
 }
 
@@ -318,6 +323,12 @@ button {
 .found {
     background:rgba(180,180,180, 0.1);
     border-radius: 7px;
+}
+
+.foot_marker {
+    float:right;
+    padding: 0px 10px 0px 10px;
+    margin : 10px 0px 10px 0px;
 }
 
 ::-webkit-scrollbar-track {

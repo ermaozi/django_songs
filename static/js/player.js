@@ -32,15 +32,15 @@ class Musics {
                 dataType:'json',
                 data:{cmd:'coordinates'},
                 async: false,
-                success: function(data){
-                    var songs = data['data']['songs'];
-                    for (var i = 0, len = songs.length; i < len; i++){
+                success: function(rsp){
+                    var data = rsp['data'];
+                    for (var i = 0, len = data.length; i < len; i++){
                         song_data.push({
-                            id: data['data']['rspid'][i],
-                            title: data['data']['name'][i],
-                            singer: data['data']['singer'][i],
-                            songUrl: '/static/music_data/songs/'+songs[i],
-                            imageUrl: '/static/music_data/images/'+data['data']['bgp'][i]
+                            id: data[i]['rspid'],
+                            title: data[i]['name'],
+                            singer: data[i]['singer'],
+                            songUrl: '/static/music_data/songs/'+data[i]['songs'],
+                            imageUrl: '/static/music_data/images/'+data[i]['bgp']
                         })
                     }
                 }
