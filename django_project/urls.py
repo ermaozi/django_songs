@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('^$', view.index),
     url('^index/', view.index),
-    url('^get_songs/', view.get_songs)
+    url('^get_songs/', view.get_songs),
+    url('^search_songs/', view.search_songs)
 ]

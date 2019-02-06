@@ -311,13 +311,13 @@ button {
 }
 .bar7 button {
 	background:none;
-	top:-2px;
 	right:20px;
+    margin-top: 9px;
 }
 .bar7 button:before {
 	content:"Search";
 	font-family:FontAwesome;
-	color:#324b4e;
+	color:#628b90;
 }
 
 .found {

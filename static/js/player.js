@@ -69,6 +69,7 @@ class PlayerCreator {
         // 下方歌曲列表容器
         this.song_list = $('.music__list_content');
         this.song_find = $('.find_song');
+        this.search_button = $('.bar7 button')
 
         this.render_doms = { //切换歌曲时需要渲染的dom组
             title: $('.music__info--title'),
@@ -139,9 +140,6 @@ class PlayerCreator {
                 }else{
                     var parent = $('ul');
                     $('li').removeClass('found');
-                    //选择包含文本框值的所有加上focus类样式，并把它（们）移到ul的最前面
-                    // prependTo() 方法在被选元素的开头（仍位于内部）插入指定内容
-                    // contains 选择器，选取包含指定字符串的元素
                     var all_song=$("li:contains('"+index+"')");
                     var first_song = all_song[0];
                     if (first_song){
@@ -153,7 +151,25 @@ class PlayerCreator {
                 }
                 $(".music-player__list").animate({scrollTop:x}, 500);
 
-        })
+        });
+        //Search按钮
+        this.search_button.on('click', function(){
+            var index = $.trim($('.find_song').val().toString()); // 去掉两头空格
+                if(index == ''){ // 如果搜索框输入为空
+                    return false;
+                }else{
+                    console.log('点击!!' + index);
+                    $.ajax({
+                        type: "POST",
+                        url: "search_songs/",
+                        dataType:'json',
+                        data:{song_name: index},
+                        success: function(rsp){
+                            console.log(rsp['data'])
+                        }
+                    });
+                }
+        });
         //播放按钮
         this.$play = new Btns('.player-control__btn--play', {
             click: this.handlePlayAndPause.bind(this)

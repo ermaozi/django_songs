@@ -63,5 +63,19 @@ def get_songs(req):
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
+def search_songs(req):
+    if req.method == 'POST':
+        req_data = req.POST
+        print(req_data)
+        song_name = req_data.get('song_name')
+        resp_data = [song_name]
+        status_code = 200
+    else:
+        resp_data = ['123']
+        status_code = 400
+    resp = {'status_code': status_code, 'data': resp_data}
+    return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
 if __name__ == '__main__':
     print(get_songs(111))
