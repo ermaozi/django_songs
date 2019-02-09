@@ -21,10 +21,15 @@ def get_songs(req):
     :param req:
     :return:
     """
+    # 遍历songs目录, 获取所有歌曲文件名并区分歌曲名与歌手名
     songs_path = os.path.realpath(os.path.join(__file__, "../../static/music_data/songs/"))
     songs_list = os.listdir(songs_path)
     name_or_singer = [song.replace(".mp3", '').split('-') for song in songs_list]
 
+    # 如果目录下存在有两个"-"的文件名则视为强制置顶排序歌曲(表白用的), 下面举个例子
+    # 李宗盛 - 我终于失去了你 - 1.mp3
+    # 陈奕迅 - 爱情转移 - 2.mp3
+    # 王力宏 - 你是我心内的一首歌 - 3.mp3
     list1 = [name for name in name_or_singer if len(name) == 3]
     list2 = [name for name in name_or_singer if len(name) < 3]
 
@@ -40,6 +45,7 @@ def get_songs(req):
     singer2 = [name[0].strip() for name in list2]
     songs2 = ["-".join(song)+".mp3" for song in list2]
 
+    # 将置顶歌曲与其他歌曲合并
     rspid = rspid1 + rspid2
     name = name1 + name2
     singer = singer1 + singer2
