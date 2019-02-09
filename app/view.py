@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import os
 import json
 import random
+from plugins.music_dl.__main__ import Music
 
 
 def index(req):
@@ -64,11 +65,17 @@ def get_songs(req):
 
 
 def search_songs(req):
+    music = Music()
     if req.method == 'POST':
         req_data = req.POST
-        print(req_data)
         song_name = req_data.get('song_name')
-        resp_data = [song_name]
+        resp_data = music.search(song_name)
+        # resp_data = [song_name]
+        status_code = 200
+    elif req.method == 'GET':
+        idx = req.GET.get('idx', default='0')
+        music.downlod_songs(idx)
+        resp_data = ['下载成功']
         status_code = 200
     else:
         resp_data = ['123']
