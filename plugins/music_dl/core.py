@@ -13,9 +13,7 @@ import re
 import importlib
 import traceback
 import logging
-import click
 from . import config
-from .utils import colorize
 from .exceptions import RequestError, ResponseError, DataError
 
 

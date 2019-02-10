@@ -15,7 +15,6 @@ import logging
 import click
 import requests
 from . import config
-from .utils import colorize
 
 
 class Music:
@@ -43,8 +42,8 @@ class Music:
 
     def __str__(self):
         """ 在打印详情时调用 """
-        idx = colorize("[ %s ] " % self.idx, "cyan")
-        source = colorize("%s" % self.source.upper(), self.source)
+        idx = "[ %s ] " % self.idx
+        source = "%s" % self.source.upper()
         return (
             "\n ------------ \n"
             + " -> 来源：%s%s #%s\n" % (idx, source, self.id)
@@ -79,12 +78,12 @@ class Music:
     @property
     def info(self):
         """ 歌曲摘要信息，列出搜索歌曲时使用 """
-        idx = colorize(" [ %2s ] " % self.idx, "cyan")
-        source = colorize("%7s" % self.source.upper(), self.source)
-        size = colorize("%5sMB" % self.size, "yellow")
-        title = colorize(self.title, "yellow")
-        v = colorize(" | ", self.source)
-        h = colorize(" - ", self.source)
+        idx = " [ %2s ] " % self.idx
+        source = "%7s" % self.source.upper()
+        size = "%5sMB" % self.size
+        title = self.title
+        v = " | "
+        h = " - "
         return (
             idx
             + source
@@ -146,10 +145,10 @@ class Music:
 
     def download(self):
         """ 下载音乐 """
-        if config.get("verbose"):
-            click.echo(str(self))
-        else:
-            click.echo(self.info)
+        # if config.get("verbose"):
+        #     click.echo(str(self))
+        # else:
+        #     click.echo(self.info)
 
         outfile = self.fullname
         try:
