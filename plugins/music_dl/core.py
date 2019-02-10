@@ -30,9 +30,9 @@ def music_search(source, music_list, errors):
         # 最后一块输出免得影响搜索结果列表排版
         err = traceback.format_exc() if config.get("verbose") else str(e)
         errors.append((source, err))
-    finally:
-        # 放在搜索后输出是为了营造出搜索很快的假象
-        click.echo(" %s ..." % colorize(source.upper(), source), nl=False)
+    # finally:
+    #     # 放在搜索后输出是为了营造出搜索很快的假象
+    #     click.echo(" %s ..." % colorize(source.upper(), source), nl=False)
 
 
 def music_download(idx, music_list):

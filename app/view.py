@@ -71,8 +71,9 @@ def get_songs(req):
 
 
 def search_songs(req):
-    music = Music()
+    music = None
     if req.method == 'POST':
+        music = Music()
         req_data = req.POST
         song_name = req_data.get('song_name')
         resp_data = music.search(song_name)

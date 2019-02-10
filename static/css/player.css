@@ -294,18 +294,18 @@ button {
 .bar7 form {
 	height:42px;
 }
+
 .bar7 input {
-	width:80%;
 	border-radius:42px;
 	border:2px solid #324B4E;
 	background:rgba(0, 0, 0, 0.3);
+    color: rgba(250,250,250, 0.3);
 	transition:.2s linear;
 	float:right;
 	margin-top:10px;
 	margin-bottom:10px;
 }
-.bar7 input:focus {
-	width:100%;
+.bar7 input:focus, .bar7 input:hover {
 	background:rgba(50, 50, 50, 0.3);
 	color: rgba(250,250,250, 0.9);
 }
@@ -318,6 +318,11 @@ button {
 	content:"Search";
 	font-family:FontAwesome;
 	color:#628b90;
+	transition:.2s linear;
+}
+
+.bar7 button:hover:before {
+	color:#94cdd4;
 }
 
 .found {
@@ -329,6 +334,21 @@ button {
     float:right;
     padding: 0px 10px 0px 10px;
     margin : 10px 0px 10px 0px;
+}
+
+.search_list {
+    display: none;
+    z-index: 999999;
+    color: rgba(250,250,250, 0.9);
+    position: absolute;
+    background: #1d1d1d;
+    width: 100%;
+    margin-top: 10%;
+    padding: 15px;
+}
+
+.show{
+    display: inline;
 }
 
 ::-webkit-scrollbar-track {

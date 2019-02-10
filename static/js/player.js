@@ -155,21 +155,37 @@ class PlayerCreator {
         //Search按钮
         this.search_button.on('click', function(){
             var index = $.trim($('.find_song').val().toString()); // 去掉两头空格
-                if(index == ''){ // 如果搜索框输入为空
-                    return false;
-                }else{
-                    console.log('点击!!' + index);
-                    $.ajax({
-                        type: "POST",
-                        url: "search_songs/",
-                        dataType:'json',
-                        data:{song_name: index},
-                        success: function(rsp){
-                            console.log(rsp['data'])
-                        }
-                    });
-                }
+            if(index == ''){ // 如果搜索框输入为空
+                return false;
+            }else{
+                $.ajax({
+                    type: "POST",
+                    url: "search_songs/",
+                    dataType:'json',
+                    data:{song_name: index},
+                    success: function(rsp){
+                        var search_list = $('.search_list_content');
+                        var rap_data = rsp['data'];
+                        console.log(rap_data);
+                        let _str = '';
+                        rap_data.forEach((song, i) => {
+                            _str += `<li class="search_list_item">${song['singer']+' - '+song['title']+' '+song['duration']+' ('+song['size']+'MB)'}</li>`
+                        });
+                        search_list.html(_str);
+                        $(".search_list").slideDown();
+                    }
+                });
+            }
         });
+
+        // 点击搜结果外任意元素将隐藏搜索结果
+        $(document).click(function(){
+            $(".search_list").slideUp();
+        });
+        $(".search_list").click(function(event){
+            event.stopPropagation();
+        });
+
         //播放按钮
         this.$play = new Btns('.player-control__btn--play', {
             click: this.handlePlayAndPause.bind(this)
