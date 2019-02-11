@@ -185,6 +185,20 @@ class PlayerCreator {
             event.stopPropagation();
         });
 
+        $('.search_list_content').on('click', '.search_list_item', (e) => {
+            let index = $(e.target).index();
+            console.log(index);
+            $.ajax({
+                type: "GET",
+                url: "search_songs/",
+                dataType:'json',
+                data:{idx: index},
+                success: function(rsp){
+                    console.log(rsp);
+                }
+            });
+        })
+
         //播放按钮
         this.$play = new Btns('.player-control__btn--play', {
             click: this.handlePlayAndPause.bind(this)

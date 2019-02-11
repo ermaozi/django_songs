@@ -9,6 +9,8 @@
 
 """
 
+import os
+
 __all__ = ["init", "set", "get"]
 
 
@@ -20,7 +22,7 @@ def init():
         # 自定义数量 -c --count
         "count": 2,
         # 保存目录 -o --outdir
-        "outdir": "/home/hjb/music/",
+        "outdir": os.path.realpath(__file__+"/../../../static/music_data/songs"),
         # 搜索关键字
         "keyword": "",
         # 显示详情
@@ -58,3 +60,7 @@ def get(key):
 
 def set(key, value):
     opts[key] = value
+
+
+if __name__ == '__main__':
+    print(os.path.realpath(__file__+"/../../../static/music_data/songs"))
