@@ -177,17 +177,10 @@ class PlayerCreator {
             }
         });
 
-        // 点击搜结果外任意元素将隐藏搜索结果
-        $(document).click(function(){
-            $(".search_list").slideUp();
-        });
-        $(".search_list").click(function(event){
-            event.stopPropagation();
-        });
-
         $('.search_list_content').on('click', '.search_list_item', (e) => {
+            $(".search_list").slideUp();
+            $(".ing").fadeIn();
             let index = $(e.target).index();
-            console.log(index);
             $.ajax({
                 type: "GET",
                 url: "search_songs/",
@@ -195,9 +188,24 @@ class PlayerCreator {
                 data:{idx: index},
                 success: function(rsp){
                     console.log(rsp);
+                    $(".ing").fadeOut();
+                    if (rsp['status_code'] == 200){
+                        $(".seccess").fadeIn();
+                    } else {
+                        $(".fail").fadeIn();
+                    }
                 }
             });
-        })
+        });
+
+        // 点击搜结果外任意元素将隐藏搜索结果
+        $(document).click(function(){
+            $(".search_list").slideUp();
+            $(".download").fadeOut();
+        });
+        $(".search_list").click(function(event){
+            event.stopPropagation();
+        });
 
         //播放按钮
         this.$play = new Btns('.player-control__btn--play', {
