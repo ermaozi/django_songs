@@ -70,18 +70,20 @@ def get_songs(req):
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
+music_dic = {}
+
+
 def search_songs(req):
-    music = None
     if req.method == 'POST':
-        music = Music()
+        music_dic['music'] = Music()
         req_data = req.POST
         song_name = req_data.get('song_name')
-        resp_data = music.search(song_name)
+        resp_data = music_dic['music'].search(song_name)
         # resp_data = [song_name]
         status_code = 200
     elif req.method == 'GET':
         idx = req.GET.get('idx', default='0')
-        music.downlod_songs(idx)
+        music_dic['music'].downlod_songs(idx)
         resp_data = ['下载成功']
         status_code = 200
     else:
