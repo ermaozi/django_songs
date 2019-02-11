@@ -133,24 +133,23 @@ class PlayerCreator {
         this.song_find.on('keyup', function(){
             var index = $.trim($('.find_song').val().toString()); // 去掉两头空格
                 var x = 0;
+                var first_top = $('.music__list__item')[0].offsetTop;
                 if(index == ''){ // 如果搜索框输入为空
                     $('li').removeClass('found');
-                    x = 0
+                    x = 0;
                     return false;
                 }else{
                     var parent = $('ul');
                     $('li').removeClass('found');
-                    var all_song=$("li:contains('"+index+"')");
+                    var all_song = $(".music__list__item:contains('"+index+"')");
                     var first_song = all_song[0];
                     if (first_song){
                         all_song.addClass('found');
                         var song_top = first_song.offsetTop;
-                        var a = $(".music-player__list").offset().top;
-                        x = song_top - a  + 40;
+                        x = song_top - first_top;
                     }
                 }
-                $(".music-player__list").animate({scrollTop:x}, 500);
-
+                $(".music-player__list").animate({scrollTop:x}, 200);
         });
         //Search按钮
         this.search_button.on('click', function(){
