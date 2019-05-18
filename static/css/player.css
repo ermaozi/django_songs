@@ -2,6 +2,9 @@ a {
     color: rgba(180,180,180, 0.3);
     color:#333;text-decoration:none;
 }
+a:hover {
+    color: rgba(180,180,180, 0.5);
+}
 
 /* 播放器位置 */
 .music-player {
@@ -30,6 +33,10 @@ a {
     margin-bottom: 10px;
     font-size: 14px;
     cursor: pointer;
+}
+.music__list__item:hover {
+    background:rgba(180,180,180, 0.1);
+    border-radius:7px;
 }
 
 .music__list__item:last-of-type {
