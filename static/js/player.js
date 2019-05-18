@@ -105,7 +105,7 @@ class PlayerCreator {
     renderSongList() {
         let _str = '';
         this.musics.songs.forEach((song, i) => {
-            _str += `<li class="music__list__item">${song.title}</li>`
+            _str += `<li class="music__list__item">${song.title} <a href="download_song?song=${song.songUrl}">下载</a></li>`
         });
         this.song_list.html(_str);
     }

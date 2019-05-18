@@ -23,5 +23,7 @@ urlpatterns = [
     url('^$', view.index),
     url('^index/', view.index),
     url('^get_songs/', view.get_songs),
-    url('^search_songs/', view.search_songs)
+    url('^search_songs/', view.search_songs),
+    url('^delete_song/', view.delete_song),
+    url('^download_song', view.download_song)
 ]

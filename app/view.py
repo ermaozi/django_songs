@@ -1,9 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-import os
+from django.http import HttpResponse, StreamingHttpResponse
+import os, shutil
 import json
 import random
 from plugins.music_dl.__main__ import Music
+from django.utils.encoding import escape_uri_path
+
+
+songs_path = os.path.realpath(os.path.join(__file__, "../../static/music_data/songs/"))
+back_path = os.path.realpath(os.path.join(__file__, "../../static/music_data/songs_back/"))
 
 
 def index(req):
@@ -22,7 +27,6 @@ def get_songs(req):
     :return:
     """
     # 遍历songs目录, 获取所有歌曲文件名并区分歌曲名与歌手名
-    songs_path = os.path.realpath(os.path.join(__file__, "../../static/music_data/songs/"))
     songs_list = os.listdir(songs_path)
     name_or_singer = [song.replace(".mp3", '').split('-') for song in songs_list]
 
@@ -38,12 +42,12 @@ def get_songs(req):
     rspid1 = [name[2].strip() for name in list1]
     name1 = [name[1].strip() for name in list1]
     singer1 = [name[0].strip() for name in list1]
-    songs1 = ["-".join(song)+".mp3" for song in list1]
+    songs1 = ["-".join(song) + ".mp3" for song in list1]
 
-    rspid2 = [i+len(rspid1)+1 for i in range(len(list2))]
+    rspid2 = [i + len(rspid1) + 1 for i in range(len(list2))]
     name2 = [name[1].strip() for name in list2]
     singer2 = [name[0].strip() for name in list2]
-    songs2 = ["-".join(song)+".mp3" for song in list2]
+    songs2 = ["-".join(song) + ".mp3" for song in list2]
 
     # 将置顶歌曲与其他歌曲合并
     rspid = rspid1 + rspid2
@@ -91,6 +95,35 @@ def search_songs(req):
         status_code = 400
     resp = {'status_code': status_code, 'data': resp_data}
     return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
+def delete_song(req):
+    if req.method == 'DEL':
+        song_name = req.DEL.get('song')
+        song_path = os.path.join(songs_path, song_name)
+        if os.path.exists(song_path):
+            shutil.move(song_path, os.path.join(back_path, song_name))
+
+
+def download_song(req):
+    # do something...
+
+    def file_iterator(file_name, chunk_size=512):
+        with open(file_name, 'rb') as f:
+            while True:
+                c = f.read(chunk_size)
+                if c:
+                    yield c
+                else:
+                    break
+
+    if req.method == 'GET':
+        song_name = req.GET.get('song')
+        the_file_name = os.path.join(songs_path, song_name.split('/')[-1])
+        response = StreamingHttpResponse(file_iterator(the_file_name))
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(escape_uri_path(song_name))
+        return response
 
 
 if __name__ == '__main__':
