@@ -118,8 +118,8 @@ def download_song(req):
                     break
 
     if req.method == 'GET':
-        song_name = req.GET.get('song')
-        the_file_name = os.path.join(songs_path, song_name.split('/')[-1])
+        song_name = req.GET.get('song').split('/')[-1]
+        the_file_name = os.path.join(songs_path, song_name)
         response = StreamingHttpResponse(file_iterator(the_file_name))
         response['Content-Type'] = 'application/octet-stream'
         response['Content-Disposition'] = 'attachment;filename="{0}"'.format(escape_uri_path(song_name))
