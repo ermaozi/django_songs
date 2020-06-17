@@ -5,7 +5,7 @@
 2. 音乐列表
 3. 搜索音乐
 
-[>> 网页地址 <<](http://119.27.172.58:8888)
+[>> 网页地址 <<](https://musicsharing.github.io/)
 
 ![外观截图](README/img/截图1.png)  
  
