@@ -1,4 +1,4 @@
-Django==2.1.6
+Django==2.2.24
 pytz==2018.9
 click
 requests
